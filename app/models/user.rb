@@ -6,6 +6,5 @@ class User < ApplicationRecord
 
 #asociaciones
 has_many :restaurants #habilita el metodo .restaurants que puedo aplicarle un each
-#validations
-validates  :name, :address, prescense: true
+
 end
