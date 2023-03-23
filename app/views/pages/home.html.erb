@@ -4,7 +4,7 @@
       <h1>El cuidado de tus hijos en las mejores manos, las de nuestras niñeras</h1>
       <p>Se parte de esta gran comunidad</p>
 
-      <a class="btn btn-primary" href="#">Registrate ahora!</a>
+      <a class="btn btn-primary" href="">Registrate ahora!</a>
     </div>
   </div>
 
@@ -21,13 +21,45 @@
             <%= image_tag food.photo %>
           </div>
           <div class="card-text">
-            <p class="card-meal-type"><%= food.name %></p>
+            <p class="card-meal-type"><%= link_to food.name, foods_path %></p>
             <h2 class="card-title"><%= food.restaurant.name %></h2>
             <p class="card-body"><%= food.description %></p>
           </div>
           <div class="card-price"> <%= number_to_currency(food.price, delimiter: ".", precision: 0, unit: "ARS $ ") %>
           </div>
         </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<div class="container">
+  <div id="header">
+    <h1>Ultimos restaurant añadidos</h1>
+  </div>
+  <div class="row mb-4">
+    <% @foods.last(3).each do |food| %>
+      <div class="col-4">
+        <section class="articles">
+          <article>
+            <div class="article-wrapper">
+              <figure>
+                <%= image_tag food.restaurant.photo %>
+              </figure>
+              <div class="article-body">
+                <h2><%= food.restaurant.name.truncate(20) %></h2>
+                <p><%= food.restaurant.description.truncate(15) %></p>
+                <a href= "/restaurants/<%=food.restaurant.id %>" class="read-more">
+                  Read more <span class="sr-only">about this is some title</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20"     fill="currentColor">
+                    <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        </section>
       </div>
     <% end %>
   </div>
