@@ -7,4 +7,6 @@ class User < ApplicationRecord
 #asociaciones
 has_many :restaurants #habilita el metodo .restaurants que puedo aplicarle un each
 
+#active record
+has_one_attached :photo
 end
