@@ -8,8 +8,12 @@
         <section class="articles">
           <article>
             <div class="article-wrapper">
-              <figure>
+               <figure>
+              <% if restaurant.photo.attached? %>
                 <%= image_tag restaurant.photo %>
+              <% else %>
+                <%= image_tag "logoninera.png" %>
+              <% end %>
               </figure>
               <div class="article-body">
                 <h2><%= restaurant.name.truncate(20) %></h2>

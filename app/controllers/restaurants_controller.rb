@@ -6,16 +6,16 @@ class RestaurantsController < ApplicationController
 
   def show
     @restaurants = Restaurant.all
-    @restaurants = Restaurant.find(params[:id])
+    @restaurant = Restaurant.find(params[:id])
   end
 
   def new
-    @restaurants = Restaurant.new
+    @restaurant = Restaurant.new
   end
 
   def create
     @restaurant = Restaurant.new(restaurant_params)
-    @restaurant.user_id = @restaurant.current_user.id
+    @restaurant.user_id = current_user.id
     if @restaurant.save
       redirect_to @restaurant, notice: "El restaurante se ha creado con éxito"
     else
@@ -23,9 +23,16 @@ class RestaurantsController < ApplicationController
     end
   end
 
+  def destroy
+    @restaurant = Restaurant.find(params[:id])
+    @restaurant.destroy
+
+    redirect_to restaurants_path, status: :see_other
+  end
+
   private
 
   def restaurant_params
-    params.require(:restaurant).permit(:name, :address, :specialty, :description, :image)
+    params.require(:restaurant).permit(:name, :address, :specialty, :description, :photo)
   end
 end
