@@ -2,17 +2,21 @@
   <div class="row">
         <div class="col-8 border rounded shadow ">
             <div class="card-image-1 mt-3 ml-3 mb-3">
-              <%= image_tag @restaurants.photo%>
+             <% if @restaurant.photo.attached? %>
+                <%= image_tag @restaurant.photo %>
+              <% else %>
+                <%= image_tag "logoninera.png" %>
+              <% end %>
             </div>
         </div>
       <div class="col-4 border rounded shadow">
         <div class="row mt-5">
           <h4 style="margin-left: -12px">Nombre</h4>
-          <%=@restaurants.name %>
+          <%=@restaurant.name %>
         </div>
         <div class="row  mt-5">
           <h4 style="margin-left: -12px">Descripcion</h4>
-          <%= @restaurants.description %>
+          <%= @restaurant.description %>
         </div>
         <div class="row w-25 mt-5">
           <%= link_to "volver", root_path,  class: " boton-r btn btn-primary"%>

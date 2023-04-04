@@ -5,7 +5,7 @@ class Restaurant < ApplicationRecord
   has_many :foods
   #validations
   validates :name, :address, presence: true
-  validates :description, length: {minimum: 15, maximum: 500}
+  validates :description, length: {minimum: 1, maximum: 500}
   #active record
   has_one_attached :photo
 end
