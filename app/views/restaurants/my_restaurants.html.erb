@@ -1,0 +1,43 @@
+<div class="container w-50 bg-white mt-5 p-3 shadow-lg rounded border">
+  <div class="row">
+    <div class="col">
+      <%= link_to "Agregar", new_restaurant_path, class: "btn btn-primary"%>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Foto</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Direccion</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @restaurants.each do |restaurant| %>
+            <tr>
+              <td>
+                <% if restaurant.photo.attached?  %>
+                  <%= image_tag restaurant.photo, :size => "50x50" %>
+                <% else %>
+                  <%= image_tag "logoninera.png", :size => "50x50"  %>
+                <% end %></td>
+              <td><%= restaurant.name %></td>
+              <td><%= restaurant.address %></td>
+              <td><%= link_to  restaurant_path(restaurant.id) do %>
+                <i class="fa-solid fa-eye"></i>
+                <% end %>
+                <%= link_to edit_restaurant_path(restaurant.id) do %>
+                <i class="fa-solid fa-pencil"></i>
+                <% end %>
+                <%= link_to restaurant_path(restaurant.id), data: {turbo_method: :delete, turbo_confirm: "Estas seguro?"} do %>
+                  <i class="fa-solid fa-trash"></i>
+                <% end %>
+              </td>
+            </tr>
+          <%end  %>
+          </tbody>
+        </table>
+
+    </div>
+  </div>
+</div>

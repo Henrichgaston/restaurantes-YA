@@ -1,0 +1,17 @@
+<div class="container w-50 bg-white mt-5 p-3 shadow-lg rounded border">
+  <div class="row">
+    <div class="col">
+      <%= form_with model: [restaurant, schedule] do |f| %>
+        <%= f.label :Día, class: "form-label" %>
+        <%= f.select :day, options_for_select(Date::DAYNAMES.map{ |day| [day, day] }), {}, class: "form-select form-control mb-3" %>
+        <%= f.label :Hora_de_apertura, class: "form-label" %>
+        <%#= f.select :open_at, [['8',  true]], {}, { class: "form-select form-control mb-3" } %>
+        <%= f.select :open_at, options_for_select((0..23).map{ |hour| ["#{hour}:00", "#{hour}:00"] }), selected: schedule.open_at, multiple: true, class: "form-select form-control mb-3" %>
+        <%= f.label :Hora_de_cierre, class: "form-label" %>
+        <%#= f.select :close_at, [['17', true]], {}, { class: "form-select form-control mb-3" } %>
+        <%= f.select :close_at, options_for_select((0..23).map{ |hour| ["#{hour}:00", "#{hour}:00"] }), selected: schedule.open_at, multiple: true, class: "form-select form-control mb-3" %>
+        <%= f.submit schedule.new_record? ? "Crear" : "Guardar", class: "mt-3 btn" %>
+      <% end %>
+    </div>
+  </div>
+</div>

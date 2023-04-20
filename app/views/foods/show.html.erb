@@ -1,25 +1,38 @@
-<div class="container rounded w-75 mt-5 shadow bg-white p-4">
-  <div class="row">
-        <div class="col-8 border rounded shadow ">
-            <div class="card-image-1 mt-3 ml-3 mb-3">
-              <%= image_tag @foods.photo%>
+<script>
+  AOS.init();
+</script>
+<div data-aos="zoom-in">
+  <div class="container">
+    <div class="row d-flex justify-content-center mt-5">
+      <div class="col-4">
+        <div class="card" id="card-show-food">
+          <div class="card-image">
+            <% if @food.photo.attached? %>
+              <%= image_tag @food.photo %>
+            <% else %>
+              <%= image_tag "logoninera.png" %>
+            <% end %>
+          </div>
+          <div class="card-text">
+            <p class="card-meal-type"><%= @food.name %></p>
+            <h2 class="card-title"><%= @food.name %></h2>
+            <p class="card-body"><%= @food.description.truncate(70) %></p>
+            <a href="/foods/ <%= @food.id %>"></a>
+            <div class="show-food-new">
+              <%= link_to "Volver", foods_path, class: "btn-food" %>
+              <%= link_to edit_food_path(@food) do %>
+                <i class="fa-solid fa-pencil"></i>
+              <% end %>
+              <%= link_to food_path(@food), data: {turbo_method: :delete, turbo_confirm: "Estas seguro?"} do %>
+                <i class="fa-solid fa-trash"></i>
+              <% end %>
             </div>
-        </div>
-      <div class="col-4 border rounded shadow">
-        <div class="row mt-5">
-          <h4 style="margin-left: -12px">Nombre</h4>
-          <%=@foods.name %>
-        </div>
-        <div class="row  mt-5">
-          <h4 style="margin-left: -12px">Descripcion</h4>
-          <%= @foods.description %>
-        </div>
-        <div class="col-6"></div>
-          <div class="row w-45 mt-5">
-            <%= link_to "volver", foods_path,  class: " boton-r btn btn-primary"%>
-            <%= link_to "Añadir al carrito ", root_path,  class: " mt-4 btn btn-primary"%>
+          </div>
+          <div class="card-price">
+            <%= number_to_currency(@food.price, delimiter: ".", precision: 0, unit: "ARS $ ") %>
           </div>
         </div>
-     </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -2,8 +2,8 @@ class Restaurant < ApplicationRecord
   include PgSearch::Model
   #Asociations
   belongs_to :user
-  has_many :schedules
-  has_many :foods
+  has_many :schedules, dependent: :destroy
+  has_many :foods, dependent: :destroy
   #validations
   validates :name, :address, presence: true
   validates :description, length: {minimum: 1, maximum: 500}
